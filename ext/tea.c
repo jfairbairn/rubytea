@@ -78,9 +78,18 @@ VALUE tkey_init_copy(VALUE copy, VALUE orig) {
 
 VALUE rubytea_exec(VALUE self, VALUE data, VALUE rkey, char op)
 {
+  if (rb_obj_is_kind_of(data, rb_cArray) != Qtrue)
+  {
+    rb_raise(rb_eArgError, "Invalid data passed to TEA::encrypt(): array of integers expected");
+    return Qnil;
+  }
   int len = RARRAY_LEN(data);
   int i;
-  if (len < 2) rb_raise(rb_eArgError, "TEA::encrypt() can only encrypt an array with two or more ints");
+  if (len < 2)
+  {
+    rb_raise(rb_eArgError, "TEA::encrypt() can only encrypt an array with two or more ints");
+    return Qnil;
+  }
   size_t c = sizeof(uint32_t) * len;
   uint32_t *ptr = ALLOCA_N(uint32_t, len);
 
