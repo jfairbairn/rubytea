@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rubytea'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.files = `git ls-files`.split("\n")
   s.extensions = ["ext/extconf.rb"]
   s.author = 'James Fairbairn'

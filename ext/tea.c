@@ -91,7 +91,7 @@ VALUE rubytea_exec(VALUE self, VALUE data, VALUE rkey, char op)
     return Qnil;
   }
   size_t c = sizeof(uint32_t) * len;
-  uint32_t *ptr = ALLOCA_N(uint32_t, len);
+  uint32_t *ptr = ALLOC_N(uint32_t, len);
 
   for (i = 0; i < len; ++i)
   {
@@ -108,6 +108,8 @@ VALUE rubytea_exec(VALUE self, VALUE data, VALUE rkey, char op)
   {
     rb_ary_store(data, i, UINT2NUM(ptr[i]));
   }
+
+  xfree(ptr);
   return data;
 
 }
